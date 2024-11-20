@@ -1,3 +1,6 @@
+import 'package:admin/main.dart';
+import 'package:admin/utility/extensions.dart';
+
 import '../../../core/data/data_provider.dart';
 import 'view_order_form.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +64,7 @@ class OrderListSection extends StatelessWidget {
                     dataProvider.orders.length,
                     (index) => orderDataRow(dataProvider.orders[index],index+1, delete: () {
                       //TODO: should complete call deleteOrder
+                      context.orderProvider.deleteOrder(dataProvider.orders[index]);
                     }, edit: () {
                       showOrderForm(context, dataProvider.orders[index]);
                     }),

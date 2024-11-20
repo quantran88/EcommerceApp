@@ -1,3 +1,6 @@
+import 'package:admin/main.dart';
+import 'package:admin/utility/extensions.dart';
+
 import 'components/order_header.dart';
 import 'components/order_list_section.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +46,10 @@ class OrderScreen extends StatelessWidget {
                               onChanged: (newValue) {
                                 if (newValue?.toLowerCase() == 'all order') {
                                   //TODO: should complete call filterOrders
+                                  context.dataProvider.filterOrders('');
                                 } else {
                                   //TODO: should complete call filterOrders
+                                  context.dataProvider.filterOrders(newValue?.toLowerCase() ?? '');
                                 }
                               },
                               validator: (value) {
@@ -59,6 +64,7 @@ class OrderScreen extends StatelessWidget {
                           IconButton(
                               onPressed: () {
                                 //TODO: should complete call getAllOrders
+                                context.dataProvider.getAllOrders(showSnack: true);
                               },
                               icon: Icon(Icons.refresh)),
                         ],

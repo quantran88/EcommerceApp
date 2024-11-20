@@ -1,4 +1,6 @@
-import '../../../core/data/data_provider.dart';
+import 'package:admin/core/data/data_provider.dart';
+import 'package:admin/utility/extensions.dart';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +33,7 @@ class Chart extends StatelessWidget {
                 Consumer<DataProvider>(
                   builder: (context, dataProvider, child) {
                     return Text(
-                      '${0}', //TODO: should complete Make this order number dynamic bt calling calculateOrdersWithStatus
+                      '${context.dataProvider.calculateOrdersWithStatus()}', //TODO: should complete Make this order number dynamic bt calling calculateOrdersWithStatus
                       style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -54,12 +56,12 @@ class Chart extends StatelessWidget {
     final DataProvider dataProvider = Provider.of<DataProvider>(context);
 
     //TODO: should complete Make this order number dynamic bt calling calculateOrdersWithStatus
-    int totalOrder = 0;
-    int pendingOrder = 0;
-    int processingOrder = 0;
-    int cancelledOrder = 0;
-    int shippedOrder = 0;
-    int deliveredOrder = 0;
+    int totalOrder = context.dataProvider.calculateOrdersWithStatus();
+    int pendingOrder = context.dataProvider.calculateOrdersWithStatus(status: 'pending');;
+    int processingOrder = context.dataProvider.calculateOrdersWithStatus(status: 'processing');;
+    int cancelledOrder = context.dataProvider.calculateOrdersWithStatus(status: 'cancelled');;
+    int shippedOrder = context.dataProvider.calculateOrdersWithStatus(status: 'shipped');;
+    int deliveredOrder = context.dataProvider.calculateOrdersWithStatus(status: 'delivered');;
 
     List<PieChartSectionData> pieChartSelectionData = [
       PieChartSectionData(
